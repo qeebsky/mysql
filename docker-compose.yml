@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0.28
+    platform: linux/amd64
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d:cached
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf:cached
+      - ./mysql/data:/var/lib/mysql:delegated
